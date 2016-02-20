@@ -1,4 +1,4 @@
-from config import GH_SECRET_TOKEN
+from config import GH_SECRET_TOKEN, PROD
 import bot
 
 from flask import Flask, request, url_for
@@ -32,4 +32,5 @@ def pull_request_comment_webhook():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    debug = not PROD
+    app.run(host='0.0.0.0', debug=debug)

@@ -8,6 +8,10 @@ GH_SECRET_TOKEN = os.getenv("GH_SECRET_TOKEN", None)
 
 assert GH_USERNAME is not None, "You must set the GH_USERNAME env var"
 assert GH_TOKEN is not None, "You must set the GH_TOKEN env var"
+assert GH_REPO is not None, "You must set the GH_REPO env var"
+assert GH_SECRET_TOKEN is not None, "You must set the GH_SECRET_TOKEN env var"
+
+PROD = os.getenv("PROD", False)
 
 github = Github(user=GH_USERNAME,
                 token=GH_TOKEN,
@@ -32,4 +36,4 @@ def create_github_webhook(url):
         user=GH_USERNAME,
         repo=GH_REPO)
 
-#create_github_webhook("fifth-guy.herokuapp.com/comment-webhook")
+create_github_webhook("fifth-guy.herokuapp.com/comment-webhook")
