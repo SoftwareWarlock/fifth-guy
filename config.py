@@ -5,7 +5,7 @@ GH_USERNAME = os.getenv("GH_USERNAME", None)
 GH_TOKEN = os.getenv("GH_TOKEN", None)
 GH_REPO = os.getenv("GH_REPO", "fifth-guy")
 GH_SECRET_TOKEN = os.getenv("GH_SECRET_TOKEN", None)
-CICLE_TOKEN = os.getenv("CIRCLE_TOKEN", None)
+CIRCLE_TOKEN = os.getenv("CIRCLE_TOKEN", None)
 
 assert GH_USERNAME is not None, "You must set the GH_USERNAME env var"
 assert GH_TOKEN is not None, "You must set the GH_TOKEN env var"
