@@ -1,6 +1,6 @@
 from config import github, GH_USERNAME, GH_REPO
 
-def issue_comment_created(pull_request_comment):
+def issue_comment_created(issue_comment):
     comment_body = issue_comment["comment"]["body"]
     if comment_body.lower() == "lgtm":
         # trigger circle ci build

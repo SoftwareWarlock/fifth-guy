@@ -16,7 +16,6 @@ def calculate_hmac(payload):
 
 def check_hmac(request):
     request_body = request.data
-    print request_body
     expected_hmac = calculate_hmac(request_body)
     print expected_hmac
     request_hmac = request.headers.get("X-Hub-Signature")
