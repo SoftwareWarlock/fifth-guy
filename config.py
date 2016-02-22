@@ -35,8 +35,3 @@ def create_github_webhook(url):
         data=hook_data,
         user=GH_USERNAME,
         repo=GH_REPO)
-
-try:
-    create_github_webhook("https://fifth-guy.herokuapp.com/comment-webhook")
-except KeyError:
-    pass
