@@ -19,12 +19,17 @@ def issue_comment_created(issue_comment):
 	    repo=GH_REPO)
 	branch = pull_request.head["ref"]
 	circle_url = get_circle_url(branch, CIRCLE_TOKEN)
-	circle_response = requests.post(circle_url)
+	circle_body = {
+	    "build_parameters": {
+	    	"RUN_E2E_TESTS": True
+	    }
+	}
+	circle_response = requests.post(circle_url, data=circle_body)
 
         issue_number = issue_comment["issue"]["number"]
         issue_comment_id = issue_comment["comment"]["id"]
         github.issues.comments.create(
 	    number=issue_number,
-	    message="Running e2e test",
+	    message="Running e2e tests",
 	    user=GH_USERNAME,
 	    repo=GH_REPO)
