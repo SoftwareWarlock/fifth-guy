@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def calculate_hmac(payload):
     hashed = hmac.new(GH_SECRET_TOKEN, payload, sha1)
-    return hashed.hexdigest().encode("base64").rstrip('\n')
+    return "sha1=" + hashed.hexdigest()
 
 
 def check_hmac(request):
