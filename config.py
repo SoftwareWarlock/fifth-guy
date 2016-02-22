@@ -18,6 +18,7 @@ github = Github(user=GH_USERNAME,
                 repo=GH_REPO)
 
 def create_github_webhook(url):
+    print "creating webhook"
     hook_data = {
         "name": "web",
         "active": True,
@@ -30,10 +31,12 @@ def create_github_webhook(url):
         "events": ["pull_request_review_comment", ]
     }
 
-    import pdb; pdb.set_trace()
     return github.repos.hooks.create(
         data=hook_data,
         user=GH_USERNAME,
         repo=GH_REPO)
 
-create_github_webhook("fifth-guy.herokuapp.com/comment-webhook")
+try:
+    create_github_webhook("fifth-guy.herokuapp.com/comment-webhook")
+except KeyError:
+    pass
