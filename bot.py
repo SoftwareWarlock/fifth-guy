@@ -24,7 +24,7 @@ def issue_comment_created(issue_comment):
 	    	"RUN_E2E_TESTS": True
 	    }
 	}
-	circle_response = requests.post(circle_url, data=circle_body)
+	circle_response = requests.post(circle_url, json=circle_body)
 
         issue_number = issue_comment["issue"]["number"]
         issue_comment_id = issue_comment["comment"]["id"]
