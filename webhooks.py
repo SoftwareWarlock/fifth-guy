@@ -16,8 +16,11 @@ def calculate_hmac(payload):
 
 def check_hmac(request):
     request_body = request.data
+    print request_body
     expected_hmac = calculate_hmac(request_body)
+    print expected_hmac
     request_hmac = request.headers.get("X-Hub-Signature")
+    print request_hmac
     return expected_hmac == request_hmac
 
 
@@ -27,9 +30,9 @@ def pull_request_comment_webhook():
     if check_hmac(request):
         pull_request_comment = request.get_json()
         bot.pull_request_comment_created(pull_request_comment)
-	print "Success"
+	print "Webhook success"
         return "Success"
-    print "Failure"
+    print "Webhook failure"
     return "Failure"
 
 
