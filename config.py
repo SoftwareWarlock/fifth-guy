@@ -28,7 +28,7 @@ def create_github_webhook(url):
             "insecure_ssl": "1",
             "url": url
         },
-        "events": ["pull_request_review_comment", ]
+        "events": ["issue_comment", ]
     }
 
     return github.repos.hooks.create(
@@ -37,6 +37,6 @@ def create_github_webhook(url):
         repo=GH_REPO)
 
 try:
-    create_github_webhook("fifth-guy.herokuapp.com/comment-webhook")
+    create_github_webhook("https://fifth-guy.herokuapp.com/comment-webhook")
 except KeyError:
     pass

@@ -25,11 +25,11 @@ def check_hmac(request):
 
 
 @app.route('/comment-webhook', methods=["POST"])
-def pull_request_comment_webhook():
+def issue_comment_webhook():
     print "Recieved webhook call"
     if check_hmac(request):
-        pull_request_comment = request.get_json()
-        bot.pull_request_comment_created(pull_request_comment)
+        issue_comment = request.get_json()
+        bot.issue_comment_created(issue_comment)
 	print "Webhook success"
         return "Success"
     print "Webhook failure"

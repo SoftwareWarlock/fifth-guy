@@ -1,18 +1,14 @@
 from config import github, GH_USERNAME, GH_REPO
 
-def pull_request_comment_created(pull_request_comment):
-    comment_body = pull_request_comment["comment"]["body"]
+def issue_comment_created(pull_request_comment):
+    comment_body = issue_comment["comment"]["body"]
     if comment_body.lower() == "lgtm":
         # trigger circle ci build
 
-        pull_request_number = pull_request_comment["pull_request"]["number"]
-        pull_request_comment_id = pull_request_comment["comment"]["id"]
-        comment_data = {
-            "body": "Running e2e tests",
-            "in_reply_to": pull_request_comment_id
-        }
-        github.pull_requests.comments.create(
-            number=pull_request_number,
-            data=comment_data,
+        issue_number = issue_comment["issue"]["number"]
+        issue_comment_id = issue_comment["comment"]["id"]
+        github.issues.comments.create(
+            number=issue_number,
+	    message="Running e2e test",
             user=GH_USERNAME,
             repo=GH_REPO)
