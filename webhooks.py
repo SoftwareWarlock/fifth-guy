@@ -11,24 +11,31 @@ app = Flask(__name__)
 
 def calculate_hmac(payload):
     hashed = hmac.new(GH_SECRET_TOKEN, payload, sha1)
-    return hashed.hexdigest().encode("base64").rstrip('\n')
+    return "sha1=" + hashed.hexdigest()
 
 
 def check_hmac(request):
     request_body = request.data
     expected_hmac = calculate_hmac(request_body)
+    print expected_hmac
     request_hmac = request.headers.get("X-Hub-Signature")
+    print request_hmac
     return expected_hmac == request_hmac
 
 
 @app.route('/comment-webhook', methods=["POST"])
-def pull_request_comment_webhook():
-    import pdb; pdb.set_trace()
-    if check_hmac(request):
-        pull_request_comment = request.get_json()
-        bot.pull_request_comment_created(pull_request_comment)
-        return "Success"
-    return "Failure"
+def issue_comment_webhook():
+    try:
+        print "Recieved webhook call"
+        if check_hmac(request):
+            issue_comment = request.get_json()
+	    bot.issue_comment_created(issue_comment)
+	    print "Webhook success"
+	    return "Success"
+	print "Webhook failure"
+	return "Failure"
+    except Exception as e:
+        print str(e)
 
 
 if __name__ == "__main__":
