@@ -71,6 +71,8 @@ def issue_comment_created(issue_comment):
                 else:
                     create_issue_comment(issue_comment, "Failed to run e2e tests")
             else:
+                print "Unkown github merge error: ", merge_response.status_code
+                print merge_response.json()
                 create_issue_comment(issue_comment, merge_response.json().get("message", "Unknown error occured"))
         else:
             create_issue_comment(issue_comment, "Look, you're gonna have to fix these merge conflicts before I can even do anything.")
