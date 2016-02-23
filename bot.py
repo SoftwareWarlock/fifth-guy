@@ -64,7 +64,7 @@ def issue_comment_created(issue_comment):
             merge_response = merge_master_into_branch(branch)
             if merge_response.status_code == 409:
                 create_issue_comment(issue_comment, "Automatic merge of master failed with conflicts")
-            elif merge_response.status_code in [200, 204]:
+            elif merge_response.status_code in [200, 201, 204]:
                 circle_response = trigger_circle_ci_build(branch)
                 if circle_response.status_code == 201:
                     create_issue_comment(issue_comment, "Running e2e tests")
