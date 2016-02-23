@@ -29,13 +29,13 @@ def issue_comment_webhook():
         print "Recieved webhook call"
         if check_hmac(request):
             issue_comment = request.get_json()
-	    bot.issue_comment_created(issue_comment)
-	    print "Webhook success"
-	    return "Success"
-	print "Webhook failure"
-	return "Failure"
+            bot.issue_comment_created(issue_comment)
+            print "Webhook success"
+            return "Success"
+        return "HMAC Failure"
     except Exception as e:
         print str(e)
+        return "Exception"
 
 
 if __name__ == "__main__":

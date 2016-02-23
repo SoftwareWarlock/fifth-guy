@@ -60,11 +60,11 @@ def issue_comment_created(issue_comment):
 
         if pull_request.mergeable:
             merge_response = merge_master_into_branch(branch)
-            if merge_response.status == 409:
+            if merge_response.status_code == 409:
                 create_issue_comment(issue_comment, "Automatic merge of master failed with conflicts")
-            else if merge_response.status in [200, 204]:
+            elif merge_response.status_code in [200, 204]:
                 circle_response = trigger_circle_ci_build(branch)
-                if circle_response.status == 201:
+                if circle_response.status_code == 201:
                     create_issue_comment(issue_comment, "Running e2e tests")
                 else:
                     create_issue_comment(issue_comment, "Failed to run e2e tests")
