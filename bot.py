@@ -9,7 +9,9 @@ def get_circle_url(branch, token):
 
 
 def get_github_merge_url(user, repo):
-    return "https://api.github.com/repos/{user}/{repo}/merges"
+    return "https://api.github.com/repos/{user}/{repo}/merges".format(
+        user=user,
+        repo=repo)
 
 
 def trigger_circle_ci_build(branch):
